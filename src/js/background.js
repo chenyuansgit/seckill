@@ -88,7 +88,17 @@ function processTask(standerTime) {
                     tabId = results[0].id;
                   }
                 }
-                chrome.tabs.executeScript(tabId, {code: "secKill(" + task.id + ");"});
+                // 刷新页面
+                chrome.tabs.update(tabId, {url: task.url});
+
+                // chrome.tabs.reload(tabId, {bypassCache: false}, function () {});
+                let hasSend = false;
+                chrome.tabs.onUpdated.addListener(function (id, changeInfo, tab) {
+                  if (changeInfo.status === 'complete' && tabId == id && !hasSend) {
+                    chrome.tabs.executeScript(tabId, {code: "secKill(" + task.id + ");"});
+                    hasSend = true;
+                  }
+                });
                 var opt = {type: "basic", title: "秒杀助手提醒", message: task.name + "\n秒杀任务完成！", iconUrl: "image/bell.png"};
                 chrome.notifications.create(dialogId++ + "", opt);
               });

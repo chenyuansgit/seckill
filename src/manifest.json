@@ -40,17 +40,6 @@
     },
     {
       "js": [
-        "inject/detail.taobao.js"
-      ],
-      "matches": [
-        "*://detail.tmall.com/*",
-        "*://detail.taobao.com/*",
-        "*://detail.tmall.hk/*",
-        "*://item.taobao.com/*"
-      ]
-    },
-    {
-      "js": [
         "inject/buy.taobao.js"
       ],
       "matches": [

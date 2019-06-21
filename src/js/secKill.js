@@ -39,17 +39,17 @@ function getElementsByXPath(STR_XPATH) {
 function dealTask(task) {
   var count = 1;
   var timer = setInterval(function () {
-    if(task.selector == "jQuery") {
-      $(task.location).each(function(){
+    if (task.selector == "jQuery") {
+      $(task.location).each(function () {
         this.click();
       });
     } else {
-      $(getElementsByXPath(task.location)).each(function(){
+      $(getElementsByXPath(task.location)).each(function () {
         this.click();
       });
     }
     count++;
-    if(count>task.count) {
+    if (count > task.count) {
       clearInterval(timer);
     }
   }, task.frequency);
